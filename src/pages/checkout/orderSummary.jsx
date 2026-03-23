@@ -31,7 +31,7 @@ export default function OrderSummary({ cart, deliveryOptions, loadCart }) {
 
               <img
                 className="product-image"
-                src="images/products/athletic-cotton-socks-6-pairs.jpg"
+                src="https://ecommerce-backend-kydf.onrender.com/images/products/athletic-cotton-socks-6-pairs.jpg"
               />
 
               <div className="cart-item-details">

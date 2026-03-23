@@ -43,7 +43,7 @@ export function CheckoutPage({ cart, loadCart }) {
                     </div>
 
                     <div className="checkout-header-right-section">
-                        <img src="images/icons/checkout-lock-icon.png" />
+                        <img src="https://ecommerce-backend-kydf.onrender.com/images/icons/checkout-lock-icon.png" />
                     </div>
                 </div>
             </div>

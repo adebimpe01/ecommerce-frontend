@@ -35,7 +35,7 @@ export function Product({ product, loadCart }) {
                 <img
                     className="product-rating-stars"
                     data-testid="product-rating-stars-image"
-                    src={`images/ratings/rating-${product.rating.stars * 10}.png`}
+                    src={`https://ecommerce-backend-kydf.onrender.com/images/ratings/rating-${product.rating.stars * 10}.png`}
                 />
                 <div className="product-rating-count link-primary"
                     data-testid="product-rating-count">
