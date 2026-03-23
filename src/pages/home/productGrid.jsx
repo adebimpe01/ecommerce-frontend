@@ -1,6 +1,5 @@
 
 import { Product } from './product';
-
 export function ProductGrid({ products, loadCart }) {
 
   return (
