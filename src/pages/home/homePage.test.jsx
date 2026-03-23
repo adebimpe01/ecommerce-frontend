@@ -1,67 +1,91 @@
 import { it, expect, describe, vi, beforeEach } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { Product } from './product';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
+import '@testing-library/jest-dom';
 import { HomePage } from './HomePage';
 
-vi.mock('axios')
+vi.mock('axios');
 
 describe('Homepage component', () => {
-    let loadCart;
+  let loadCart;
 
-    beforeEach(() => {
-        loadCart = vi.fn();
+  beforeEach(() => {
+    loadCart = vi.fn();
 
-        axios.get.mockImplementation(async (urlPath) => {
-            if (urlPath === 'api/products') {
-                return {
-                    data: [{
-                        id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-                        image: "images/products/athletic-cotton-socks-6-pairs.jpg",
-                        name: "Black and Gray Athletic Cotton Socks - 6 Pairs",
-                        rating: {
-                            stars: 4.5,
-                            count: 87
-                        },
-                        priceCents: 1090,
-                        keywords: ["socks", "sports", "apparel"]
-                    },
-                    {
-                        id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-                        image: "images/products/intermediate-composite-basketball.jpg",
-                        name: "Intermediate Size Basketball",
-                        rating: {
-                            stars: 4,
-                            count: 127
-                        },
-                        priceCents: 2095,
-                        keywords: ["sports", "basketballs"]
-                    },]
-                };
+    axios.get.mockImplementation(async (urlPath) => {
+      if (urlPath === '/api/products') {
+        return {
+          data: [
+            {
+              id: "1",
+              image: "images/products/test.jpg",
+              name: "Product 1",
+              rating: { stars: 4.5, count: 87 },
+              priceCents: 1090,
+              keywords: ["test"]
+            },
+            {
+              id: "2",
+              image: "images/products/test2.jpg",
+              name: "Product 2",
+              rating: { stars: 4, count: 127 },
+              priceCents: 2095,
+              keywords: ["test"]
             }
-        });
+          ]
+        };
+      }
     });
+  });
 
-    it('displays the products correct', async () => {
-        render(
-            <MemoryRouter>
-                <HomePage cart={[]} loadCart={loadCart} />
-            </MemoryRouter>
-        );
-         const productContainer = await screen.findAllByTestId('product-container')  ; 
-         expect(productContainer.length).toBe(2);
+  it('displays the products correctly', async () => {
+    render(
+      <MemoryRouter>
+        <HomePage cart={[]} loadCart={loadCart} />
+      </MemoryRouter>
+    );
 
-        expect(
-         within(productContainer[0])
-            .getByText('Black and Gray Athletic Cotton Socks - 6 Pairs')
-        ).toBeInTheDocument();
-          
+    // Wait for products to appear
+    const productContainers = await screen.findAllByTestId('product-container');
+    expect(productContainers).toHaveLength(2);
 
-           expect(
-         within(productContainer[1])
-            .getByText('Intermediate Size Basketball')
-        ).toBeInTheDocument();
-            });
-    });
+    // Check names
+    expect(within(productContainers[0]).getByText('Product 1')).toBeInTheDocument();
+    expect(within(productContainers[1]).getByText('Product 2')).toBeInTheDocument();
+  });
+
+  it('can add a product to the cart', async () => {
+    render(
+      <MemoryRouter>
+        <HomePage cart={[]} loadCart={loadCart} />
+      </MemoryRouter>
+    );
+
+    const addButtons = await screen.findAllByRole('button', { name: /add to cart/i });
+    
+    // Click the first "Add to cart" button
+    await userEvent.click(addButtons[0]);
+
+    // Expect loadCart to be called once
+    expect(loadCart).toHaveBeenCalledTimes(1);
+  });
+
+  it('filters products by keyword', async () => {
+    render(
+      <MemoryRouter>
+        <HomePage cart={[]} loadCart={loadCart} />
+      </MemoryRouter>
+    );
+
+    const searchInput = screen.getByPlaceholderText(/search products/i);
+
+    // Type a keyword and trigger filtering
+    await userEvent.type(searchInput, 'test');
+
+    // Wait for filtered results
+    const filteredProducts = await screen.findAllByTestId('product-container');
+    expect(filteredProducts.length).toBeGreaterThan(0);
+  });
+});
