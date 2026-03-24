@@ -14,7 +14,7 @@ export default function OrderSummary({ cart, deliveryOptions, loadCart }) {
         });
 
         const deleteCartItem = async() => {
-          await axios .delete(`/api/cart-items/${cartItem.productId}`);
+          await axios .delete(`https://ecommerce-backend-kydf.onrender.com/api/cart-items/${cartItem.productId}`);
           await loadCart();
         };
 
@@ -31,8 +31,7 @@ export default function OrderSummary({ cart, deliveryOptions, loadCart }) {
 
               <img
                 className="product-image"
-                src="https://ecommerce-backend-kydf.onrender.com/images/products/athletic-cotton-socks-6-pairs.jpg"
-              />
+                src={`https://ecommerce-backend-kydf.onrender.com/${cartItem.product.image}`} />
 
               <div className="cart-item-details">
 

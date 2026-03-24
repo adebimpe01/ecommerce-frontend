@@ -35,7 +35,7 @@ describe('Product component', () => {
 
     expect(screen.getByTestId('product-image')).toHaveAttribute(
       'src',
-      product.image
+      `https://ecommerce-backend-kydf.onrender.com/${product.image}`
     );
 
     expect(screen.getByTestId('product-rating-stars-image')).toHaveAttribute(
@@ -53,7 +53,7 @@ describe('Product component', () => {
     const addToCartButton = screen.getByTestId('add-to-cart-button');
     await user.click(addToCartButton);
 
-    expect(axios.post).toHaveBeenCalledWith('/api/cart-items', {
+    expect(axios.post).toHaveBeenCalledWith('https://ecommerce-backend-kydf.onrender.com/api/cart-items', {
       productId: product.id,
       quantity: 1
     });
