@@ -15,10 +15,10 @@ export function CheckoutPage({ cart, loadCart }) {
     useEffect(() => {
 
         const fetchCheckoutData = async () => {
-            let response = await axios.get('https://ecommerce-backend-kydf.onrender.com/api/products');
+            let response = await axios.get('https://ecommerce-backend-4-7yqg.onrender.com/api/products');
             setDeliveryOptions(response.data);
 
-            response = await axios.get('https://ecommerce-backend-kydf.onrender.com/api/payment-summary');
+            response = await axios.get('https://ecommerce-backend-4-7yqg.onrender.com/api/payment-summary');
             setPaymentSummary(response.data);
         };
         fetchCheckoutData();
@@ -43,7 +43,7 @@ export function CheckoutPage({ cart, loadCart }) {
                     </div>
 
                     <div className="checkout-header-right-section">
-                        <img src="https://ecommerce-backend-kydf.onrender.com/images/icons/checkout-lock-icon.png" />
+                        <img src="https://ecommerce-backend-4-7yqg.onrender.com/images/icons/checkout-lock-icon.png" />
                     </div>
                 </div>
             </div>

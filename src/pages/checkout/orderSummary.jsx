@@ -14,7 +14,7 @@ export default function OrderSummary({ cart, deliveryOptions, loadCart }) {
         });
 
         const deleteCartItem = async() => {
-          await axios .delete(`https://ecommerce-backend-kydf.onrender.com/api/cart-items/${cartItem.productId}`);
+          await axios .delete(`https://ecommerce-backend-4-7yqg.onrender.com/api/cart-items/${cartItem.productId}`);
           await loadCart();
         };
 
@@ -31,7 +31,7 @@ export default function OrderSummary({ cart, deliveryOptions, loadCart }) {
 
               <img
                 className="product-image"
-                src={`https://ecommerce-backend-kydf.onrender.com/${cartItem.product.image}`} />
+                src={`https://ecommerce-backend-4-7yqg.onrender.com/${cartItem.product.image}`} />
 
               <div className="cart-item-details">
 

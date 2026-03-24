@@ -9,7 +9,7 @@ export function HomePage({ cart, loadCart }) {
 
   useEffect(() => {
     const getHomeData = async () => {
-      const response = await axios.get('https://ecommerce-backend-kydf.onrender.com/api/products');
+      const response = await axios.get('https://ecommerce-backend-4-7yqg.onrender.com/api/products');
       setProducts(response.data);
     };
     getHomeData();
