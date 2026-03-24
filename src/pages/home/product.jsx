@@ -2,73 +2,80 @@ import axios from 'axios';
 import { useState } from "react";
 import { formatMoney } from "../../utils/money";
 
+// ✅ Optional: create a reusable axios instance
+const api = axios.create({
+  baseURL: 'https://ecommerce-backend-kydf.onrender.com'
+});
+
 export function Product({ product, loadCart }) {
-    const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
-    const addToCart = async () => {
-        await axios.post('/api/cart-items', {
-            productId: product.id,
-            quantity
-        });
+  const addToCart = async () => {
+    try {
+      // Use full backend URL via api instance
+      await api.post('/api/cart-items', {
+        productId: product.id,
+        quantity
+      });
 
-        await loadCart(); // reload cart
-    };
-    const selectQuantity = (event) => {
-        const quantitySelected = Number(event.target.value)
-        setQuantity(quantitySelected);
-    };
+      // Reload cart
+      await loadCart();
+    } catch (err) {
+      console.error('Add to Cart Error:', err.response?.data || err.message);
+      alert('Failed to add to cart. Try again!');
+    }
+  };
 
-    return (
-        <div className="product-container"
-            data-testid = "product-container">
-            <div className="product-image-container">
-                <img className="product-image"
-                data-testid="product-image"
-                 src={`https://ecommerce-backend-kydf.onrender.com/${product.image}`} />
-            </div>
+  const selectQuantity = (event) => {
+    setQuantity(Number(event.target.value));
+  };
 
-            <div className="product-name limit-text-to-2-lines">
-                {product.name}
-            </div>
+  return (
+    <div className="product-container" data-testid="product-container">
+      <div className="product-image-container">
+        <img
+          className="product-image"
+          data-testid="product-image"
+          src={`https://ecommerce-backend-kydf.onrender.com/${product.image}`}
+          alt={product.name}
+        />
+      </div>
 
-            <div className="product-rating-container">
-                <img
-                    className="product-rating-stars"
-                    data-testid="product-rating-stars-image"
-                    src={`https://ecommerce-backend-kydf.onrender.com/images/ratings/rating-${product.rating.stars * 10}.png`}
-                />
-                <div className="product-rating-count link-primary"
-                    data-testid="product-rating-count">
-                    {product.rating.count}
-                </div>
-            </div>
+      <div className="product-name limit-text-to-2-lines">
+        {product.name}
+      </div>
 
-            <div className="product-price">
-                {formatMoney(product.priceCents)}
-            </div>
-            <div className="product-quantity-container">
-                <select value={quantity} onChange={selectQuantity}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-            </div>
-
-            <button
-                className="add-to-cart-button button-primary"
-                data-testid="add-to-cart-button"
-                onClick={addToCart}
-            >
-                Add to Cart
-            </button>
-
+      <div className="product-rating-container">
+        <img
+          className="product-rating-stars"
+          data-testid="product-rating-stars-image"
+          src={`https://ecommerce-backend-kydf.onrender.com/images/ratings/rating-${product.rating.stars * 10}.png`}
+          alt={`${product.rating.stars} stars`}
+        />
+        <div className="product-rating-count link-primary" data-testid="product-rating-count">
+          {product.rating.count}
         </div>
-    );
+      </div>
+
+      <div className="product-price">{formatMoney(product.priceCents)}</div>
+
+      <div className="product-quantity-container">
+        <select value={quantity} onChange={selectQuantity}>
+          {[...Array(10)].map((_, i) => (
+            <option key={i + 1} value={i + 1}>
+              {i + 1}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <button
+        className="add-to-cart-button button-primary"
+        data-testid="add-to-cart-button"
+        onClick={addToCart}
+      >
+        Add to Cart
+      </button>
+    </div>
+  );
 }

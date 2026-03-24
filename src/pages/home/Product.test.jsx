@@ -5,7 +5,7 @@ import { Product } from './product';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 
-vi.mock('axios');
+vi.mock('axios'); // mocks axios globally
 
 describe('Product component', () => {
   let product;
@@ -23,7 +23,10 @@ describe('Product component', () => {
 
     loadCart = vi.fn();
 
-    // Mock axios post
+    // Mock axios.create to return axios itself
+    axios.create = vi.fn(() => axios);
+
+    // Mock axios.post for the API instance
     axios.post = vi.fn().mockResolvedValue({ data: {} });
   });
 
@@ -40,7 +43,7 @@ describe('Product component', () => {
 
     expect(screen.getByTestId('product-rating-stars-image')).toHaveAttribute(
       'src',
-      'images/ratings/rating-45.png'
+      'https://ecommerce-backend-kydf.onrender.com/images/ratings/rating-45.png'
     );
 
     expect(screen.getByTestId('product-rating-count')).toBeInTheDocument();
@@ -53,7 +56,7 @@ describe('Product component', () => {
     const addToCartButton = screen.getByTestId('add-to-cart-button');
     await user.click(addToCartButton);
 
-    expect(axios.post).toHaveBeenCalledWith('https://ecommerce-backend-kydf.onrender.com/api/cart-items', {
+    expect(axios.post).toHaveBeenCalledWith('/api/cart-items', {
       productId: product.id,
       quantity: 1
     });
