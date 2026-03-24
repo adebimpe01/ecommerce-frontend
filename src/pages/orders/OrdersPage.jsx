@@ -9,7 +9,7 @@ export function OrdersPage({ cart }) {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-      axios.get('https://ecommerce-backend-4-7yqg.onrender.com/api/orders?expand=products')
+      axios.get('https://ecommerce-backend-6-dupy.onrender.com/api/orders?expand=products')
             .then((response) => {
                 setOrders(response.data);
             });
@@ -52,7 +52,7 @@ export function OrdersPage({ cart }) {
                                         return (
                                             <Fragment key={orderProduct.product.id}>
                                                 <div className="product-image-container">
-                                                    <img src={`https://ecommerce-backend-4-7yqg.onrender.com/${orderProduct.product.image}`} />
+                                                    <img src={`https://ecommerce-backend-6-dupy.onrender.com/${orderProduct.product.image}`} />
                                                 </div>
 
                                                 <div className="product-details">
@@ -69,7 +69,7 @@ export function OrdersPage({ cart }) {
                                                     </div>
 
                                                     <button className="buy-again-button button-primary">
-                                                        <img className="buy-again-icon" src="https://ecommerce-backend-4-7yqg.onrender.com/images/icons/buy-again.png" />
+                                                        <img className="buy-again-icon" src="https://ecommerce-backend-6-dupy.onrender.com/images/icons/buy-again.png" />
                                                         <span className="buy-again-message">Add to Cart</span>
                                                     </button>
                                                 </div>

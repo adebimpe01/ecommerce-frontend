@@ -1,21 +1,30 @@
-import axios, { Axios } from "axios";
+import axios from "axios";
 import dayjs from "dayjs";
 import { formatMoney } from "../../utils/money";
-import  DeliveryOption  from "./DeliveryOption";
+import DeliveryOption from "./DeliveryOption";
+
+// ✅ axios instance
+const api = axios.create({
+  baseURL: "https://ecommerce-backend-6-dupy.onrender.com"
+});
 
 export default function OrderSummary({ cart, deliveryOptions, loadCart }) {
   return (
     <div className="order-summary">
       {deliveryOptions.length > 0 && cart?.map((cartItem) => {
 
-        const selectedDeliveryOption = deliveryOptions
-        .find((deliveryOption) =>{
-          return deliveryOption.id === cartItem.deliveryOptionId;
-        });
+        const selectedDeliveryOption = deliveryOptions.find(
+          (deliveryOption) =>
+            deliveryOption.id === cartItem.deliveryOptionId
+        );
 
-        const deleteCartItem = async() => {
-          await axios .delete(`https://ecommerce-backend-4-7yqg.onrender.com/api/cart-items/${cartItem.productId}`);
-          await loadCart();
+        const deleteCartItem = async () => {
+          try {
+            await api.delete(`/api/cart-items/${cartItem.productId}`);
+            await loadCart();
+          } catch (err) {
+            console.error("Delete error:", err);
+          }
         };
 
         return (
@@ -29,9 +38,12 @@ export default function OrderSummary({ cart, deliveryOptions, loadCart }) {
 
             <div className="cart-item-details-grid">
 
+              {/* ✅ FIXED IMAGE PATH */}
               <img
                 className="product-image"
-                src={`https://ecommerce-backend-4-7yqg.onrender.com/${cartItem.product.image}`} />
+                src={`https://ecommerce-backend-6-dupy.onrender.com/images/${cartItem.product.image}`}
+                alt={cartItem.product.name}
+              />
 
               <div className="cart-item-details">
 
@@ -55,7 +67,8 @@ export default function OrderSummary({ cart, deliveryOptions, loadCart }) {
                     Update
                   </span>
 
-                  <span className="delete-quantity-link link-primary"
+                  <span
+                    className="delete-quantity-link link-primary"
                     onClick={deleteCartItem}
                   >
                     Delete
@@ -76,4 +89,4 @@ export default function OrderSummary({ cart, deliveryOptions, loadCart }) {
       })}
     </div>
   );
-}       
+}
