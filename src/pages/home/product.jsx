@@ -24,7 +24,7 @@ export function Product({ product, loadCart }) {
             <div className="product-image-container">
                 <img className="product-image"
                 data-testid="product-image"
-                 src={product.image} />
+                 src={`https://ecommerce-backend-kydf.onrender.com/${product.image}`} />
             </div>
 
             <div className="product-name limit-text-to-2-lines">

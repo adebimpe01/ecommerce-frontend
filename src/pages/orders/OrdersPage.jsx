@@ -52,7 +52,7 @@ export function OrdersPage({ cart }) {
                                         return (
                                             <Fragment key={orderProduct.product.id}>
                                                 <div className="product-image-container">
-                                                    <img src={orderProduct.product.image} />
+                                                    <img src={`https://ecommerce-backend-kydf.onrender.com/${orderProduct.product.image}`} />
                                                 </div>
 
                                                 <div className="product-details">
