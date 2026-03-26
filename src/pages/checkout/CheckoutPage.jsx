@@ -21,7 +21,7 @@ export function CheckoutPage({ cart = [], loadCart }) {
     const fetchCheckoutData = async () => {
       try {
         const deliveryRes = await api.get('/api/delivery-options');
-        setDeliveryOptions(deliveryRes.data);
+        setDeliveryOptions(deliveryRes.data)
 
         const paymentRes = await api.get('/api/payment-summary');
         setPaymentSummary(paymentRes.data);
