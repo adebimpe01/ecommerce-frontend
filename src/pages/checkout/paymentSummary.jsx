@@ -5,7 +5,7 @@ export function PaymentSummary({ paymentSummary, loadCart }) {
     const navigate = useNavigate();
 
     const createOrder = async() => {
-        await axios.post('https://ecommerce-backend-4-7yqg.onrender.com/api/orders');
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/orders`);
         await loadCart();
         navigate('/orders');
     };

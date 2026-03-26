@@ -12,9 +12,9 @@ export function Header({ cart = [] }) {
             <div className="left-section">
                 <Link to="/" className="header-link">
                     <img className="logo"
-                        src="https://ecommerce-backend-kydf.onrender.com/images/logo-white.png" />
+                        src={`${import.meta.env.VITE_API_URL}/images/logo-white.png`} />
                     <img className="mobile-logo"
-                        src="https://ecommerce-backend-kydf.onrender.com/images/mobile-logo-white.png" />
+                        src={`${import.meta.env.VITE_API_URL}/images/mobile-logo-white.png`} />
                 </Link>
                     
             </div>
@@ -23,7 +23,7 @@ export function Header({ cart = [] }) {
                 <input className="search-bar" type="text" placeholder="Search" />
 
                 <button className="search-button">
-                    <img className="search-icon" src="https://ecommerce-backend-kydf.onrender.com/images/icons/search-icon.png" />
+                    <img className="search-icon" src={`${import.meta.env.VITE_API_URL}/images/icons/search-icon.png`} />
                 </button>
             </div>
 
@@ -34,7 +34,7 @@ export function Header({ cart = [] }) {
                 </Link>
 
                 <Link className="cart-link header-link" to="/checkout">
-                    <img className="cart-icon" src="https://ecommerce-backend-kydf.onrender.com/images/icons/cart-icon.png" />
+                    <img className="cart-icon" src={`${import.meta.env.VITE_API_URL}/images/icons/cart-icon.png`} />
                     <div className="cart-quantity">{totalQuantity}</div>
                     <div className="cart-text">Cart</div>
                 </Link>
