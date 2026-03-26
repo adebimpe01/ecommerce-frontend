@@ -8,7 +8,7 @@ import './CheckoutPage.css';
 
 // ✅ axios instance
 const api = axios.create({
-  baseURL: 'https://ecommerce-backend-6-dupy.onrender.com'
+  baseURL: 'https://ecommerce-backend-9-7r4n.onrender.com/'
 });
 
 export function CheckoutPage({ cart = [], loadCart }) {
@@ -45,12 +45,12 @@ export function CheckoutPage({ cart = [], loadCart }) {
             <Link to="/">
               <img 
                 className="logo" 
-                src="https://ecommerce-backend-6-dupy.onrender.com/images/logo.png"
+                src="https://ecommerce-backend-9-7r4n.onrender.com/images/logo.png"
                 alt="Logo"
               />
               <img 
                 className="mobile-logo" 
-                src="https://ecommerce-backend-6-dupy.onrender.com/images/mobile-logo.png"
+                src="https://ecommerce-backend-9-7r4n.onrender.com/images/mobile-logo.png"
                 alt="Mobile Logo"
               />
             </Link>
@@ -66,7 +66,7 @@ export function CheckoutPage({ cart = [], loadCart }) {
 
           <div className="checkout-header-right-section">
             <img 
-              src="https://ecommerce-backend-6-dupy.onrender.com/images/icons/checkout-lock-icon.png"
+              src="https://ecommerce-backend-9-7r4n.onrender.com/images/icons/checkout-lock-icon.png"
               alt="Secure Checkout"
             />
           </div>

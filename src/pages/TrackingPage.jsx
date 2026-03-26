@@ -25,7 +25,7 @@ export function TrackingPage() {
             Quantity: 1
             </div>
 
-            <img className="product-image" src="https://ecommerce-backend-6-dupy.onrender.com/images/products/athletic-cotton-socks-6-pairs.jpg" />
+            <img className="product-image" src="https://ecommerce-backend-9-7r4n.onrender.com/images/products/athletic-cotton-socks-6-pairs.jpg" />
 
             <div className="progress-labels-container">
             <div className="progress-label">

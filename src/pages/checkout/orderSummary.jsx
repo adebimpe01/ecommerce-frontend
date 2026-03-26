@@ -5,7 +5,7 @@ import DeliveryOption from "./DeliveryOption";
 
 // ✅ axios instance
 const api = axios.create({
-  baseURL: "https://ecommerce-backend-6-dupy.onrender.com"
+  baseURL: "https://ecommerce-backend-9-7r4n.onrender.com/"
 });
 
 export default function OrderSummary({ cart, deliveryOptions, loadCart }) {
@@ -41,7 +41,7 @@ export default function OrderSummary({ cart, deliveryOptions, loadCart }) {
               {/* ✅ FIXED IMAGE PATH */}
               <img
                 className="product-image"
-                src={`https://ecommerce-backend-6-dupy.onrender.com/images/${cartItem.product.image}`}
+                src={`https://ecommerce-backend-9-7r4n.onrender.com/images/${cartItem.product.image}`}
                 alt={cartItem.product.name}
               />
 

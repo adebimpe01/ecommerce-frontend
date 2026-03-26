@@ -4,7 +4,7 @@ import { formatMoney } from "../../utils/money";
 
 // ✅ Optional: create a reusable axios instance
 const api = axios.create({
-  baseURL: 'https://ecommerce-backend-6-dupy.onrender.com'
+  baseURL: 'https://ecommerce-backend-9-7r4n.onrender.com/'
 });
 
 export function Product({ product, loadCart }) {
@@ -36,7 +36,7 @@ export function Product({ product, loadCart }) {
         <img
           className="product-image"
           data-testid="product-image"
-          src={`https://ecommerce-backend-6-dupy.onrender.com/${product.image}`}
+          src={`https://ecommerce-backend-9-7r4n.onrender.com/${product.image}`}
           alt={product.name}
         />
       </div>
@@ -49,7 +49,7 @@ export function Product({ product, loadCart }) {
         <img
           className="product-rating-stars"
           data-testid="product-rating-stars-image"
-          src={`https://ecommerce-backend-6-dupy.onrender.com/images/ratings/rating-${product.rating.stars * 10}.png`}
+          src={`https://ecommerce-backend-9-7r4n.onrender.com/images/ratings/rating-${product.rating.stars * 10}.png`}
           alt={`${product.rating.stars} stars`}
         />
         <div className="product-rating-count link-primary" data-testid="product-rating-count">

@@ -38,12 +38,12 @@ describe('Product component', () => {
 
     expect(screen.getByTestId('product-image')).toHaveAttribute(
       'src',
-      `https://ecommerce-backend-6-dupy.onrender.com/${product.image}`
+      `https://ecommerce-backend-9-7r4n.onrender.com/${product.image}`
     );
 
     expect(screen.getByTestId('product-rating-stars-image')).toHaveAttribute(
       'src',
-      'https://ecommerce-backend-6-dupy.onrender.com/images/ratings/rating-45.png'
+      'https://ecommerce-backend-9-7r4n.onrender.com/images/ratings/rating-45.png'
     );
 
     expect(screen.getByTestId('product-rating-count')).toBeInTheDocument();
