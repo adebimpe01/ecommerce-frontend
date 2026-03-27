@@ -5,9 +5,20 @@ export function PaymentSummary({ paymentSummary, loadCart }) {
     const navigate = useNavigate();
 
     const createOrder = async() => {
-        await axios.post(`${import.meta.env.VITE_API_URL}/api/orders`);
-        await loadCart();
-        navigate('/orders');
+        try {
+            if (!paymentSummary || paymentSummary.totalItems === 0) {
+                alert('Your cart is empty. Please add items before placing an order.');
+                return;
+            }
+
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/orders`);
+            await loadCart();
+            navigate('/orders');
+        } catch (err) {
+            console.error('Create order error:', err.response?.data || err.message);
+            const errorMessage = err.response?.data?.error || 'Failed to create order. Please try again.';
+            alert(errorMessage);
+        }
     };
     return (
         <div className="payment-summary">
